@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Student_Management.AutoMapper;
 using Student_Management.Data;
+using Student_Management.Repository;
+using Student_Management.Repository.IRepository;
 
 namespace Student_Management
 {
@@ -32,6 +34,9 @@ namespace Student_Management
             services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
 
             services.AddAutoMapper(typeof(ManagementMapper));
         }

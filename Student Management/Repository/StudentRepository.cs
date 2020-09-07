@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Student_Management.Repository
 {
-    public class StudentRepository : IStudent
+    public class StudentRepository : IStudentRepository
     {
         private readonly ApplicationDbContext _db;
 

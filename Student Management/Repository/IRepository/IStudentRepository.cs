@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Student_Management.Repository.IRepository
 {
-    public interface IStudent
+    public interface IStudentRepository
     {
         ICollection<Student> GetStudents();
 
