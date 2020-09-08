@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Student Management</name>
+    </assembly>
+    <members>
+        <member name="M:Student_Management.Controllers.DepartmentController.GetDepartments">
+            <summary>
+            Get all department list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Student_Management.Controllers.DepartmentController.GetDepartment(System.Int32)">
+            <summary>
+            Get individual department
+            </summary>
+            <param name="departmentId"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

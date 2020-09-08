@@ -5,6 +5,11 @@
     <RootNamespace>Student_Management</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Student Management.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Data\20200903042705_addDbSetToDb.cs" />
     <Compile Remove="Data\20200903042705_addDbSetToDb.Designer.cs" />

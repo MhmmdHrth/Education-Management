@@ -24,6 +24,11 @@ namespace Student_Management.Controllers
             _mapper = mapper;
         }
 
+
+        /// <summary>
+        /// Get all department list
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetDepartments()
         {
@@ -38,6 +43,11 @@ namespace Student_Management.Controllers
             return Ok(objList);
         }
 
+        /// <summary>
+        /// Get individual department
+        /// </summary>
+        /// <param name="departmentId"></param>
+        /// <returns></returns>
         [HttpGet("departmentId:int", Name = "GetDepartment")]
         public IActionResult GetDepartment(int departmentId)
         {
