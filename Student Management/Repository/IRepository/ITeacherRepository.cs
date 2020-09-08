@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Student_Management.Repository.IRepository
 {
-    interface ITeacherRepository
+    public interface ITeacherRepository
     {
         ICollection<Teacher> GetTeachers();
 
