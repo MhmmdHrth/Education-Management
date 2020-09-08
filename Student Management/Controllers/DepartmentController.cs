@@ -13,6 +13,7 @@ namespace Student_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class DepartmentController : ControllerBase
     {
         private readonly IDepartmentRepository _departmentRepo;
@@ -30,6 +31,7 @@ namespace Student_Management.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<DepartmentDto>))]
         public IActionResult GetDepartments()
         {
             var objList = _departmentRepo.GetDepartments();
@@ -49,6 +51,8 @@ namespace Student_Management.Controllers
         /// <param name="departmentId"></param>
         /// <returns></returns>
         [HttpGet("departmentId:int", Name = "GetDepartment")]
+        [ProducesResponseType(200, Type = typeof(DepartmentDto))]
+        [ProducesResponseType(404)]
         public IActionResult GetDepartment(int departmentId)
         {
             var obj = _departmentRepo.GetDepartment(departmentId);
@@ -63,6 +67,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(201, Type = typeof(DepartmentDto))]
         public IActionResult CreateDepartment(DepartmentDto departmentDto)
         {
             if(departmentDto == null)
@@ -88,6 +95,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(204)]
         public IActionResult UpdateDepartment(int departmentId, DepartmentDto departmentDto)
         {
             if(departmentDto == null || departmentId != departmentDto.Id)
@@ -106,6 +116,10 @@ namespace Student_Management.Controllers
         }
 
         [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(204)]
         public IActionResult UpdateDepartment(int departmentId)
         {
             if (!_departmentRepo.isDepartmentExists(departmentId))
