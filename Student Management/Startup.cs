@@ -47,7 +47,14 @@ namespace Student_Management
                 options.SwaggerDoc("EducationSystemManagement", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
                     Title = "Education Management",
-                    Version = "1"
+                    Version = "1",
+                    Description = "The easier and simply way to manage education system",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Name = "Muhammad Harith",
+                        Email = "mhmmdhrth99@gmail.com",
+                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
+                    }
                 });
 
                 var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
