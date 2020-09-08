@@ -39,6 +39,15 @@ namespace Student_Management
             services.AddScoped<IStudentRepository, StudentRepository>();
 
             services.AddAutoMapper(typeof(ManagementMapper));
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("EducationSystemManagement", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Education Management",
+                    Version = "1"
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,6 +58,12 @@ namespace Student_Management
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/EducationSystemManagement/swagger.json", "EducationSystemManagement");
+            });
 
             app.UseRouting();
 
