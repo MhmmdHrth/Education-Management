@@ -95,7 +95,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(204, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public IActionResult UpdateDepartment(int departmentId, DepartmentDto departmentDto)

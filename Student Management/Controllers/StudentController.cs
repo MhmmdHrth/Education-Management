@@ -26,7 +26,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type = typeof(List<StudentDto>))]
         public IActionResult GetStudents()
         {
             var students = _studentRepo.GetStudents();
@@ -41,7 +41,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet("{studentId:int}", Name = nameof(GetStudent))] //{uniqueName:type}
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
         public IActionResult GetStudent(int studentId)
         {
@@ -57,7 +57,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(201)]
+        [ProducesResponseType(201, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public IActionResult CreateStudent(StudentDto studentDto)
@@ -85,7 +85,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(204, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public IActionResult UpdateStudent(int studentId, StudentDto studentDto)

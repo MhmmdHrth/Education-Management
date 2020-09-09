@@ -85,7 +85,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(204, Type = typeof(TeacherDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
         public IActionResult UpdateTeacher(int teacherId, TeacherDto teacherDto)
