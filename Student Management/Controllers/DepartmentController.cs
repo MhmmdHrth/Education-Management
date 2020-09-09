@@ -67,9 +67,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [ProducesResponseType(201, Type = typeof(DepartmentDto))]
         public IActionResult CreateDepartment(DepartmentDto departmentDto)
         {
             if(departmentDto == null)
@@ -95,9 +95,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
+        [ProducesResponseType(204)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [ProducesResponseType(204)]
         public IActionResult UpdateDepartment(int departmentId, DepartmentDto departmentDto)
         {
             if(departmentDto == null || departmentId != departmentDto.Id)
@@ -116,11 +116,11 @@ namespace Student_Management.Controllers
         }
 
         [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
-        [ProducesResponseType(409)]
         [ProducesResponseType(204)]
-        public IActionResult UpdateDepartment(int departmentId)
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult DeleteDepartment(int departmentId)
         {
             if (!_departmentRepo.isDepartmentExists(departmentId))
             {

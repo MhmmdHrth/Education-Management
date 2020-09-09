@@ -13,6 +13,7 @@ namespace Student_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class StudentController : ControllerBase
     {
         private readonly IStudentRepository _studentRepo;
@@ -25,6 +26,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200)]
         public IActionResult GetStudents()
         {
             var students = _studentRepo.GetStudents();
@@ -39,6 +41,8 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet("{studentId:int}", Name = nameof(GetStudent))] //{uniqueName:type}
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
         public IActionResult GetStudent(int studentId)
         {
             var student = _studentRepo.GetStudent(studentId);
@@ -53,6 +57,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public IActionResult CreateStudent(StudentDto studentDto)
         {
             if(studentDto == null)
@@ -78,6 +85,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public IActionResult UpdateStudent(int studentId, StudentDto studentDto)
         {
             if(studentDto == null || studentId != studentDto.Id)
@@ -97,6 +107,10 @@ namespace Student_Management.Controllers
         }
 
         [HttpDelete]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
         public IActionResult DeleteStudent(int studentId)
         {
             if (!_studentRepo.isStudentExists(studentId))

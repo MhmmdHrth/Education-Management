@@ -13,6 +13,7 @@ namespace Student_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class TeacherController : ControllerBase
     {
         private readonly ITeacherRepository _teacherRepo;
@@ -25,6 +26,7 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<TeacherDto>))]
         public IActionResult GetTeachers()
         {
             var objList = _teacherRepo.GetTeachers();
@@ -39,6 +41,8 @@ namespace Student_Management.Controllers
         }
 
         [HttpGet("{teacherId:int}",Name = nameof(GetTeacher))] //{uniqueName:type}
+        [ProducesResponseType(200,Type = typeof(TeacherDto))]
+        [ProducesResponseType(400)]
         public IActionResult GetTeacher(int teacherId)
         {
             var obj = _teacherRepo.GetTeacher(teacherId);
@@ -53,6 +57,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(TeacherDto))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public IActionResult CreateTeacher(TeacherDto teacherDto)
         {
             if(teacherDto == null)
@@ -78,6 +85,9 @@ namespace Student_Management.Controllers
         }
 
         [HttpPatch]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public IActionResult UpdateTeacher(int teacherId, TeacherDto teacherDto)
         {
             if(teacherDto == null || teacherId != teacherDto.Id)
@@ -97,6 +107,10 @@ namespace Student_Management.Controllers
         }
 
         [HttpDelete]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
         public IActionResult DeleteTeacher(int teacherId)
         {
             if (!_teacherRepo.isTeacherExists(teacherId))
