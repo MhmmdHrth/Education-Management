@@ -15,8 +15,16 @@ namespace Student_Management.AutoMapper
         public ManagementMapper()
         {
             CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<Department, DepartmentCreateDto>().ReverseMap();
+            CreateMap<Department, DepartmentUpdateDto>().ReverseMap();
+
             CreateMap<Teacher, TeacherDto>().ReverseMap();
+            CreateMap<Teacher, TeacherCreateDto>().ReverseMap();
+            CreateMap<Teacher, TeacherUpdateDto>().ReverseMap();
+
             CreateMap<Student, StudentDto>().ReverseMap();
+            CreateMap<Student, StudentCreateDto>().ReverseMap();
+            CreateMap<Student, StudentUpdateDto>().ReverseMap();
         }
     }
 }
