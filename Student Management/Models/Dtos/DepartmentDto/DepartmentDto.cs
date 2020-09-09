@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Student_Management.Models.Dtos
+namespace Student_Management.Models.Dtos.DepartmentDto
 {
     public class DepartmentDto
     {

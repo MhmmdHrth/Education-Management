@@ -4,12 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Student_Management.Models.Dtos
+namespace Student_Management.Models.Dtos.StudentDto
 {
-    public class StudentDto
+    public class StudentCreateDto
     {
-        public int Id { get; set; }
-
         [Required]
         public string Name { get; set; }
 

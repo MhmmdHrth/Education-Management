@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Student_Management.Models;
-using Student_Management.Models.Dtos;
+using Student_Management.Models.Dtos.StudentDto;
 using Student_Management.Repository.IRepository;
 
 namespace Student_Management.Controllers

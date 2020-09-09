@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Student_Management.Models.Dtos
+namespace Student_Management.Models.Dtos.StudentDto
 {
-    public class TeacherDto
+    public class StudentDto
     {
         public int Id { get; set; }
 
@@ -22,9 +22,7 @@ namespace Student_Management.Models.Dtos
         [Phone]
         public int PhoneNumber { get; set; }
 
-        public byte[] Picture { get; set; }
-
         [Required]
-        public int DepartmentId { get; set; }
+        public int TeacherId { get; set; }
     }
 }
