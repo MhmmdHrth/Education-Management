@@ -25,6 +25,10 @@ namespace Student_Management.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get list of all Students
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<StudentDto>))]
         public IActionResult GetStudents()
@@ -40,6 +44,11 @@ namespace Student_Management.Controllers
             return Ok(studentDto);
         }
 
+        /// <summary>
+        /// Get list of individual Student
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
         [HttpGet("{studentId:int}", Name = nameof(GetStudent))] //{uniqueName:type}
         [ProducesResponseType(200, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
@@ -56,6 +65,11 @@ namespace Student_Management.Controllers
             return Ok(studentDto);
         }
 
+        /// <summary>
+        /// Create Student
+        /// </summary>
+        /// <param name="studentDto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
@@ -84,6 +98,13 @@ namespace Student_Management.Controllers
             return CreatedAtRoute(nameof(GetStudent), new { studentId = studentObj.Id }, studentObj);
         }
 
+
+        /// <summary>
+        /// Update Student Details
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="studentDto"></param>
+        /// <returns></returns>
         [HttpPatch]
         [ProducesResponseType(204, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
@@ -106,6 +127,11 @@ namespace Student_Management.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete Student
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
         [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

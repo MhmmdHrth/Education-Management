@@ -27,7 +27,7 @@ namespace Student_Management.Controllers
 
 
         /// <summary>
-        /// Get all department list
+        /// Get list of Departments
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -46,7 +46,7 @@ namespace Student_Management.Controllers
         }
 
         /// <summary>
-        /// Get individual department
+        /// Get list of individual Department
         /// </summary>
         /// <param name="departmentId"></param>
         /// <returns></returns>
@@ -65,7 +65,12 @@ namespace Student_Management.Controllers
             var objDto = _mapper.Map<DepartmentDto>(obj);
             return Ok(objDto);
         }
-
+        
+        /// <summary>
+        /// Create Department
+        /// </summary>
+        /// <param name="departmentDto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
@@ -94,6 +99,12 @@ namespace Student_Management.Controllers
             return CreatedAtRoute("GetDepartment", new { departmentId = departmentObj.Id }, departmentObj);
         }
 
+        /// <summary>
+        /// Update Deparment Details
+        /// </summary>
+        /// <param name="departmentId"></param>
+        /// <param name="departmentDto"></param>
+        /// <returns></returns>
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
         [ProducesResponseType(204, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
@@ -115,6 +126,11 @@ namespace Student_Management.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete Department
+        /// </summary>
+        /// <param name="departmentId"></param>
+        /// <returns></returns>
         [HttpDelete("{departmentId:int}", Name = "DeleteDepartment")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

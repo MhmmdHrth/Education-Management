@@ -25,6 +25,11 @@ namespace Student_Management.Controllers
             _mapper = mapper;
         }
 
+
+        /// <summary>
+        /// Get list of all Teachers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<TeacherDto>))]
         public IActionResult GetTeachers()
@@ -40,6 +45,11 @@ namespace Student_Management.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// Get list of individual Teacher
+        /// </summary>
+        /// <param name="teacherId"></param>
+        /// <returns></returns>
         [HttpGet("{teacherId:int}",Name = nameof(GetTeacher))] //{uniqueName:type}
         [ProducesResponseType(200,Type = typeof(TeacherDto))]
         [ProducesResponseType(400)]
@@ -56,6 +66,11 @@ namespace Student_Management.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// Create Teacher
+        /// </summary>
+        /// <param name="teacherDto"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(TeacherDto))]
         [ProducesResponseType(404)]
@@ -84,6 +99,13 @@ namespace Student_Management.Controllers
             return CreatedAtRoute(nameof(GetTeacher), new { teacherId = teacherObj.Id }, teacherObj);
         }
 
+
+        /// <summary>
+        /// Update Teacher Details
+        /// </summary>
+        /// <param name="teacherId"></param>
+        /// <param name="teacherDto"></param>
+        /// <returns></returns>
         [HttpPatch]
         [ProducesResponseType(204, Type = typeof(TeacherDto))]
         [ProducesResponseType(404)]
@@ -106,6 +128,12 @@ namespace Student_Management.Controllers
             return NoContent();
         }
 
+
+        /// <summary>
+        /// Delete Teacher
+        /// </summary>
+        /// <param name="teacherId"></param>
+        /// <returns></returns>
         [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
