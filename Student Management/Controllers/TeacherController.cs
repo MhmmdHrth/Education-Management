@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Student_Management.Models;
 using Student_Management.Models.Dtos.TeacherDto;
 using Student_Management.Repository.IRepository;
+using System.Collections.Generic;
 
 namespace Student_Management.Controllers
 {
@@ -27,7 +24,6 @@ namespace Student_Management.Controllers
             _mapper = mapper;
         }
 
-
         /// <summary>
         /// Get list of all Teachers
         /// </summary>
@@ -39,7 +35,7 @@ namespace Student_Management.Controllers
             var objList = _teacherRepo.GetTeachers();
             var objDto = new List<TeacherDto>();
 
-            foreach(var obj in objList)
+            foreach (var obj in objList)
             {
                 objDto.Add(_mapper.Map<TeacherDto>(obj));
             }
@@ -52,14 +48,14 @@ namespace Student_Management.Controllers
         /// </summary>
         /// <param name="teacherId"></param>
         /// <returns></returns>
-        [HttpGet("{teacherId:int}",Name = nameof(GetTeacher))] //{uniqueName:type}
-        [ProducesResponseType(200,Type = typeof(TeacherDto))]
+        [HttpGet("{teacherId:int}", Name = nameof(GetTeacher))] //{uniqueName:type}
+        [ProducesResponseType(200, Type = typeof(TeacherDto))]
         [ProducesResponseType(400)]
         public IActionResult GetTeacher(int teacherId)
         {
             var obj = _teacherRepo.GetTeacher(teacherId);
 
-            if(obj == null)
+            if (obj == null)
             {
                 return NotFound();
             }
@@ -79,7 +75,7 @@ namespace Student_Management.Controllers
         [ProducesResponseType(500)]
         public IActionResult CreateTeacher(TeacherCreateDto teacherCreateDto)
         {
-            if(teacherCreateDto == null)
+            if (teacherCreateDto == null)
             {
                 return BadRequest(ModelState);
             }
@@ -101,7 +97,6 @@ namespace Student_Management.Controllers
             return CreatedAtRoute(nameof(GetTeacher), new { teacherId = teacherObj.Id }, teacherObj);
         }
 
-
         /// <summary>
         /// Update Teacher Details
         /// </summary>
@@ -114,7 +109,7 @@ namespace Student_Management.Controllers
         [ProducesResponseType(500)]
         public IActionResult UpdateTeacher(int teacherId, TeacherUpdateDto teacherUpdateDto)
         {
-            if(teacherUpdateDto == null || teacherId != teacherUpdateDto.Id)
+            if (teacherUpdateDto == null || teacherId != teacherUpdateDto.Id)
             {
                 return BadRequest(ModelState);
             }
@@ -129,7 +124,6 @@ namespace Student_Management.Controllers
 
             return NoContent();
         }
-
 
         /// <summary>
         /// Delete Teacher

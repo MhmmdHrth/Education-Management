@@ -1,10 +1,5 @@
-﻿using Microsoft.VisualBasic;
-using Student_Management.Models;
-using System;
+﻿using Student_Management.Models;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Student_Management.Repository.IRepository
 {

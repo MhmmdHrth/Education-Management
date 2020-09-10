@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Student_Management.Models.Dtos.TeacherDto
 {
@@ -27,6 +23,6 @@ namespace Student_Management.Models.Dtos.TeacherDto
         public byte[] Picture { get; set; }
 
         [Required]
-        public int DepartmentId { get; set; } 
+        public int DepartmentId { get; set; }
     }
 }

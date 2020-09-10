@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Student_Management.Models;
 using Student_Management.Models.Dtos.StudentDto;
 using Student_Management.Repository.IRepository;
+using System.Collections.Generic;
 
 namespace Student_Management.Controllers
 {
@@ -38,7 +35,7 @@ namespace Student_Management.Controllers
             var students = _studentRepo.GetStudents();
             var studentDto = new List<StudentDto>();
 
-            foreach(var obj in students)
+            foreach (var obj in students)
             {
                 studentDto.Add(_mapper.Map<StudentDto>(obj));
             }
@@ -58,7 +55,7 @@ namespace Student_Management.Controllers
         {
             var student = _studentRepo.GetStudent(studentId);
 
-            if(student == null)
+            if (student == null)
             {
                 return NotFound();
             }
@@ -78,7 +75,7 @@ namespace Student_Management.Controllers
         [ProducesResponseType(500)]
         public IActionResult CreateStudent(StudentCreateDto StudentCreateDto)
         {
-            if(StudentCreateDto == null)
+            if (StudentCreateDto == null)
             {
                 return BadRequest(ModelState);
             }
@@ -100,7 +97,6 @@ namespace Student_Management.Controllers
             return CreatedAtRoute(nameof(GetStudent), new { studentId = studentObj.Id }, studentObj);
         }
 
-
         /// <summary>
         /// Update Student Details
         /// </summary>
@@ -113,7 +109,7 @@ namespace Student_Management.Controllers
         [ProducesResponseType(500)]
         public IActionResult UpdateStudent(int studentId, StudentUpdateDto studentUpdateDto)
         {
-            if(studentUpdateDto == null || studentId != studentUpdateDto.Id)
+            if (studentUpdateDto == null || studentId != studentUpdateDto.Id)
             {
                 return BadRequest(ModelState);
             }

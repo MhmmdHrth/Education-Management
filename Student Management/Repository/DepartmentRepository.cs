@@ -1,11 +1,8 @@
 ﻿using Student_Management.Data;
 using Student_Management.Models;
 using Student_Management.Repository.IRepository;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Student_Management.Repository
 {
