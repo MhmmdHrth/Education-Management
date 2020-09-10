@@ -17,14 +17,14 @@
             <param name="departmentId"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.DepartmentController.CreateDepartment(Student_Management.Models.Dtos.DepartmentDto.DepartmentDto)">
+        <member name="M:Student_Management.Controllers.DepartmentController.CreateDepartment(Student_Management.Models.Dtos.DepartmentDto.DepartmentCreateDto)">
             <summary>
             Create Department
             </summary>
             <param name="departmentDto"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.DepartmentController.UpdateDepartment(System.Int32,Student_Management.Models.Dtos.DepartmentDto.DepartmentDto)">
+        <member name="M:Student_Management.Controllers.DepartmentController.UpdateDepartment(System.Int32,Student_Management.Models.Dtos.DepartmentDto.DepartmentUpdateDto)">
             <summary>
             Update Deparment Details
             </summary>
@@ -59,7 +59,7 @@
             <param name="studentDto"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.StudentController.UpdateStudent(System.Int32,Student_Management.Models.Dtos.StudentDto.StudentDto)">
+        <member name="M:Student_Management.Controllers.StudentController.UpdateStudent(System.Int32,Student_Management.Models.Dtos.StudentDto.StudentUpdateDto)">
             <summary>
             Update Student Details
             </summary>

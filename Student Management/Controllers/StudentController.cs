@@ -68,26 +68,26 @@ namespace Student_Management.Controllers
         /// <summary>
         /// Create Student
         /// </summary>
-        /// <param name="studentDto"></param>
+        /// <param name="StudentCreateDto"></param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult CreateStudent(StudentDto studentDto)
+        public IActionResult CreateStudent(StudentCreateDto StudentCreateDto)
         {
-            if(studentDto == null)
+            if(StudentCreateDto == null)
             {
                 return BadRequest(ModelState);
             }
 
-            if (_studentRepo.isStudentExists(studentDto.Name))
+            if (_studentRepo.isStudentExists(StudentCreateDto.Name))
             {
                 ModelState.AddModelError("", $"Teacher is exists!");
                 return StatusCode(404, ModelState);
             }
 
-            var studentObj = _mapper.Map<Student>(studentDto);
+            var studentObj = _mapper.Map<Student>(StudentCreateDto);
 
             if (!_studentRepo.CreateStudent(studentObj))
             {
@@ -103,20 +103,20 @@ namespace Student_Management.Controllers
         /// Update Student Details
         /// </summary>
         /// <param name="studentId"></param>
-        /// <param name="studentDto"></param>
+        /// <param name="studentUpdateDto"></param>
         /// <returns></returns>
         [HttpPatch]
         [ProducesResponseType(204, Type = typeof(StudentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateStudent(int studentId, StudentDto studentDto)
+        public IActionResult UpdateStudent(int studentId, StudentUpdateDto studentUpdateDto)
         {
-            if(studentDto == null || studentId != studentDto.Id)
+            if(studentUpdateDto == null || studentId != studentUpdateDto.Id)
             {
                 return BadRequest(ModelState);
             }
 
-            var studentObj = _mapper.Map<Student>(studentDto);
+            var studentObj = _mapper.Map<Student>(studentUpdateDto);
 
             if (!_studentRepo.UpdateStudent(studentObj))
             {

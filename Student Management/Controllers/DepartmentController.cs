@@ -66,30 +66,30 @@ namespace Student_Management.Controllers
             var objDto = _mapper.Map<DepartmentDto>(obj);
             return Ok(objDto);
         }
-        
+
         /// <summary>
         /// Create Department
         /// </summary>
-        /// <param name="departmentDto"></param>
+        /// <param name="departmentCreateDto"></param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult CreateDepartment(DepartmentDto departmentDto)
+        public IActionResult CreateDepartment(DepartmentCreateDto departmentCreateDto)
         {
-            if(departmentDto == null)
+            if(departmentCreateDto == null)
             {
                 return BadRequest(ModelState);
             }
 
-            if (_departmentRepo.isDepartmentExists(departmentDto.Name))
+            if (_departmentRepo.isDepartmentExists(departmentCreateDto.Name))
             {
                 ModelState.AddModelError("", "Department Exists!");
                 return StatusCode(404, ModelState);
             }
 
-            var departmentObj = _mapper.Map<Department>(departmentDto);
+            var departmentObj = _mapper.Map<Department>(departmentCreateDto);
 
             if (!_departmentRepo.CreateDepartment(departmentObj))
             {
@@ -104,20 +104,20 @@ namespace Student_Management.Controllers
         /// Update Deparment Details
         /// </summary>
         /// <param name="departmentId"></param>
-        /// <param name="departmentDto"></param>
+        /// <param name="departmentUpdateDto"></param>
         /// <returns></returns>
         [HttpPatch("{departmentId:int}", Name = "UpdateDepartment")]
         [ProducesResponseType(204, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateDepartment(int departmentId, DepartmentDto departmentDto)
+        public IActionResult UpdateDepartment(int departmentId, DepartmentUpdateDto departmentUpdateDto)
         {
-            if(departmentDto == null || departmentId != departmentDto.Id)
+            if(departmentUpdateDto == null || departmentId != departmentUpdateDto.Id)
             {
                 return BadRequest(ModelState);
             };
 
-            var departmentObj = _mapper.Map<Department>(departmentDto);
+            var departmentObj = _mapper.Map<Department>(departmentUpdateDto);
             if (!_departmentRepo.UpdateDepartment(departmentObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when updating the record {departmentObj.Name}");
