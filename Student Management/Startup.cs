@@ -77,6 +77,7 @@ namespace Student_Management
             app.UseSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/EducationSystemManagement/swagger.json", "EducationSystemManagement");
+                options.RoutePrefix = "";
             });
 
             app.UseRouting();

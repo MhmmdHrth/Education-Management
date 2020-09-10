@@ -21,7 +21,7 @@
             <summary>
             Create Department
             </summary>
-            <param name="departmentDto"></param>
+            <param name="departmentCreateDto"></param>
             <returns></returns>
         </member>
         <member name="M:Student_Management.Controllers.DepartmentController.UpdateDepartment(System.Int32,Student_Management.Models.Dtos.DepartmentDto.DepartmentUpdateDto)">
@@ -29,7 +29,7 @@
             Update Deparment Details
             </summary>
             <param name="departmentId"></param>
-            <param name="departmentDto"></param>
+            <param name="departmentUpdateDto"></param>
             <returns></returns>
         </member>
         <member name="M:Student_Management.Controllers.DepartmentController.DeleteDepartment(System.Int32)">
@@ -52,11 +52,11 @@
             <param name="studentId"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.StudentController.CreateStudent(Student_Management.Models.Dtos.StudentDto.StudentDto)">
+        <member name="M:Student_Management.Controllers.StudentController.CreateStudent(Student_Management.Models.Dtos.StudentDto.StudentCreateDto)">
             <summary>
             Create Student
             </summary>
-            <param name="studentDto"></param>
+            <param name="StudentCreateDto"></param>
             <returns></returns>
         </member>
         <member name="M:Student_Management.Controllers.StudentController.UpdateStudent(System.Int32,Student_Management.Models.Dtos.StudentDto.StudentUpdateDto)">
@@ -64,7 +64,7 @@
             Update Student Details
             </summary>
             <param name="studentId"></param>
-            <param name="studentDto"></param>
+            <param name="studentUpdateDto"></param>
             <returns></returns>
         </member>
         <member name="M:Student_Management.Controllers.StudentController.DeleteStudent(System.Int32)">
@@ -87,19 +87,19 @@
             <param name="teacherId"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.TeacherController.CreateTeacher(Student_Management.Models.Dtos.TeacherDto.TeacherDto)">
+        <member name="M:Student_Management.Controllers.TeacherController.CreateTeacher(Student_Management.Models.Dtos.TeacherDto.TeacherCreateDto)">
             <summary>
             Create Teacher
             </summary>
-            <param name="teacherDto"></param>
+            <param name="teacherCreateDto"></param>
             <returns></returns>
         </member>
-        <member name="M:Student_Management.Controllers.TeacherController.UpdateTeacher(System.Int32,Student_Management.Models.Dtos.TeacherDto.TeacherDto)">
+        <member name="M:Student_Management.Controllers.TeacherController.UpdateTeacher(System.Int32,Student_Management.Models.Dtos.TeacherDto.TeacherUpdateDto)">
             <summary>
             Update Teacher Details
             </summary>
             <param name="teacherId"></param>
-            <param name="teacherDto"></param>
+            <param name="teacherUpdateDto"></param>
             <returns></returns>
         </member>
         <member name="M:Student_Management.Controllers.TeacherController.DeleteTeacher(System.Int32)">
