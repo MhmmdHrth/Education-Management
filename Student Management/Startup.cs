@@ -44,7 +44,33 @@ namespace Student_Management
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("EducationSystemManagement", new Microsoft.OpenApi.Models.OpenApiInfo()
+                options.SwaggerDoc("Department", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Education Management",
+                    Version = "1",
+                    Description = "The easier and simply way to manage education system",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Name = "Muhammad Harith",
+                        Email = "mhmmdhrth99@gmail.com",
+                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
+                    }
+                });
+
+                options.SwaggerDoc("Teacher", new Microsoft.OpenApi.Models.OpenApiInfo()
+                {
+                    Title = "Education Management",
+                    Version = "1",
+                    Description = "The easier and simply way to manage education system",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                    {
+                        Name = "Muhammad Harith",
+                        Email = "mhmmdhrth99@gmail.com",
+                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
+                    }
+                });
+
+                options.SwaggerDoc("Student", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
                     Title = "Education Management",
                     Version = "1",
@@ -76,7 +102,9 @@ namespace Student_Management
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/EducationSystemManagement/swagger.json", "EducationSystemManagement");
+                options.SwaggerEndpoint("/swagger/Department/swagger.json", "Department");
+                options.SwaggerEndpoint("/swagger/Teacher/swagger.json", "Teacher");
+                options.SwaggerEndpoint("/swagger/Student/swagger.json", "Student");
                 options.RoutePrefix = "";
             });
 

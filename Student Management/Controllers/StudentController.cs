@@ -13,6 +13,7 @@ namespace Student_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = nameof(Student))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class StudentController : ControllerBase
     {
