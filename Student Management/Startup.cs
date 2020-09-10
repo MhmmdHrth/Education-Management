@@ -9,15 +9,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Student_Management.AutoMapper;
 using Student_Management.Data;
 using Student_Management.Repository;
 using Student_Management.Repository.IRepository;
+using Student_Management.Swagger;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Student_Management
 {
@@ -42,55 +47,22 @@ namespace Student_Management
 
             services.AddAutoMapper(typeof(ManagementMapper));
 
-            services.AddSwaggerGen(options =>
+            //------------------------------------------------------------------------SWAGGER------------------------------------------------------------------//
+            services.AddApiVersioning(options =>
             {
-                options.SwaggerDoc("Department", new Microsoft.OpenApi.Models.OpenApiInfo()
-                {
-                    Title = "Education Management",
-                    Version = "1",
-                    Description = "The easier and simply way to manage education system",
-                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
-                    {
-                        Name = "Muhammad Harith",
-                        Email = "mhmmdhrth99@gmail.com",
-                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
-                    }
-                });
-
-                options.SwaggerDoc("Teacher", new Microsoft.OpenApi.Models.OpenApiInfo()
-                {
-                    Title = "Education Management",
-                    Version = "1",
-                    Description = "The easier and simply way to manage education system",
-                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
-                    {
-                        Name = "Muhammad Harith",
-                        Email = "mhmmdhrth99@gmail.com",
-                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
-                    }
-                });
-
-                options.SwaggerDoc("Student", new Microsoft.OpenApi.Models.OpenApiInfo()
-                {
-                    Title = "Education Management",
-                    Version = "1",
-                    Description = "The easier and simply way to manage education system",
-                    Contact = new Microsoft.OpenApi.Models.OpenApiContact()
-                    {
-                        Name = "Muhammad Harith",
-                        Email = "mhmmdhrth99@gmail.com",
-                        Url = new Uri("https://linkedin.com/in/harith-jamdil-a500b5190")
-                    }
-                });
-
-                var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlCommentFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
-
-                options.IncludeXmlComments(xmlCommentFullPath);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
             });
+
+            services.AddVersionedApiExplorer(Options => Options.GroupNameFormat = "'v'VVV");
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
+
+            
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -102,9 +74,10 @@ namespace Student_Management
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/Department/swagger.json", "Department");
-                options.SwaggerEndpoint("/swagger/Teacher/swagger.json", "Teacher");
-                options.SwaggerEndpoint("/swagger/Student/swagger.json", "Student");
+                foreach(var desc in provider.ApiVersionDescriptions)
+                {
+                    options.SwaggerEndpoint($"/swagger/{desc.GroupName}/swagger.json", desc.GroupName.ToUpperInvariant());
+                }
                 options.RoutePrefix = "";
             });
 
