@@ -11,7 +11,8 @@ using Student_Management.Repository.IRepository;
 
 namespace Student_Management.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     [ApiExplorerSettings(GroupName = nameof(Student))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
