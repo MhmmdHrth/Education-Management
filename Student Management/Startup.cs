@@ -35,6 +35,7 @@ namespace Student_Management
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(typeof(ManagementMapper));
 
@@ -49,8 +50,10 @@ namespace Student_Management
             services.AddVersionedApiExplorer(Options => Options.GroupNameFormat = "'v'VVV");
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
-        }
 
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+        }
+         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
