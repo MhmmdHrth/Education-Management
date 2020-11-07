@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Student_Management.Repository.IRepository
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         bool IsUniqueUser(string username);
 
