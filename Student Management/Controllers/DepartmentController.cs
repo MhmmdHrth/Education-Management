@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Student_Management.Models;
@@ -12,6 +13,7 @@ namespace Student_Management.Controllers
     [ApiVersion("1.0")]
     [ApiController]
     [ApiExplorerSettings(GroupName = nameof(Department))]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class DepartmentController : ControllerBase
     {
@@ -48,7 +50,7 @@ namespace Student_Management.Controllers
         /// </summary>
         /// <param name="departmentId"></param>
         /// <returns></returns>
-        [HttpGet("departmentId:int", Name = "GetDepartment")]
+        [HttpGet("{departmentId:int}",Name = "GetDepartment")]
         [ProducesResponseType(200, Type = typeof(DepartmentDto))]
         [ProducesResponseType(404)]
         public IActionResult GetDepartment(int departmentId)
