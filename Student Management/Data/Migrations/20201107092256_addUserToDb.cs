@@ -2,7 +2,7 @@
 
 namespace Student_Management.Migrations
 {
-    public partial class addUsertoDb : Migration
+    public partial class addUserToDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace Student_Management.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    Role = table.Column<string>(nullable: true)
+                    Role = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

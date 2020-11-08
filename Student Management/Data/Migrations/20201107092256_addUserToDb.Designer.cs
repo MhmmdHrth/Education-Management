@@ -10,8 +10,8 @@ using Student_Management.Data;
 namespace Student_Management.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201107025255_addUsertoDb")]
-    partial class addUsertoDb
+    [Migration("20201107092256_addUserToDb")]
+    partial class addUserToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,8 +112,8 @@ namespace Student_Management.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
