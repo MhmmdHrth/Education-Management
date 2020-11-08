@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Student_Management.Models;
+using Student_Management.Models.Dtos;
 using Student_Management.Models.Dtos.DepartmentDto;
 using Student_Management.Models.Dtos.StudentDto;
 using Student_Management.Models.Dtos.TeacherDto;
@@ -21,6 +22,9 @@ namespace Student_Management.AutoMapper
             CreateMap<Student, StudentDto>().ReverseMap();
             CreateMap<Student, StudentCreateDto>().ReverseMap();
             CreateMap<Student, StudentUpdateDto>().ReverseMap();
+
+            CreateMap<User, UserRegisterDto>().ReverseMap();
+            CreateMap<User, UserSignInDto>().ReverseMap();
         }
     }
 }
