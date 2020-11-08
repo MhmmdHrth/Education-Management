@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BCrypt.Net;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Student_Management.Data;
@@ -31,32 +32,34 @@ namespace Student_Management.Repository
         public User Authenticate(UserSignInDto modelVm)
         {
             var user = context.Users.SingleOrDefault
-                                (x => x.Username == modelVm.Username && x.Password == modelVm.Password);
+                                (x => x.Username == modelVm.Username);
 
-            if(user == null)
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(modelVm.Password, user.Password);
+
+            if (isValidPassword)
             {
-                return null;
+                //generate token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var secretBytes = Encoding.UTF8.GetBytes(appSettings.SecretKey);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    }),
+                    Expires = DateTime.Now.AddDays(7),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretBytes), SecurityAlgorithms.HmacSha256)
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                user.Token = tokenHandler.WriteToken(token);
+
+                return user;
             }
 
-            //generate token
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var secretBytes = Encoding.UTF8.GetBytes(appSettings.SecretKey);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.Now.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretBytes), SecurityAlgorithms.HmacSha256)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            user.Token = tokenHandler.WriteToken(token);
-
-            return user;
+            return null;
         }
 
         public bool IsUniqueUser(string username)
@@ -66,6 +69,8 @@ namespace Student_Management.Repository
 
         public User Register(UserRegisterDto modelVm)
         {
+            modelVm.Password = BCrypt.Net.BCrypt.HashPassword(modelVm.Password);
+
             var obj = mapper.Map<User>(modelVm);
             context.Add(obj);
             context.SaveChanges();
