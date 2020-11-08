@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Student_Management.Data;
 using Student_Management.Models;
+using Student_Management.Models.Dtos;
 using Student_Management.Repository.IRepository;
 using System;
 using System.Collections.Generic;
@@ -16,17 +18,20 @@ namespace Student_Management.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext context;
+        private readonly IMapper mapper;
         private readonly AppSettings appSettings;
 
-        public UserRepository(ApplicationDbContext context, IOptions<AppSettings> appSettings)
+        public UserRepository(ApplicationDbContext context, IOptions<AppSettings> appSettings, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
             this.appSettings = appSettings.Value;
         }
 
-        public User Authenticate(string username, string password)
+        public User Authenticate(UserSignInDto modelVm)
         {
-            var user = context.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = context.Users.SingleOrDefault
+                                (x => x.Username == modelVm.Username && x.Password == modelVm.Password);
 
             if(user == null)
             {
@@ -59,9 +64,13 @@ namespace Student_Management.Repository
             throw new NotImplementedException();
         }
 
-        public User Register(string username, string password)
+        public User Register(UserRegisterDto modelVm)
         {
-            throw new NotImplementedException();
+            var obj = mapper.Map<User>(modelVm);
+            context.Add(obj);
+            context.SaveChanges();
+
+            return obj;
         }
     }
 }

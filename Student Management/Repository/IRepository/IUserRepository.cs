@@ -1,4 +1,5 @@
 ﻿using Student_Management.Models;
+using Student_Management.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Student_Management.Repository.IRepository
     {
         bool IsUniqueUser(string username);
 
-        User Authenticate(string username, string password);
+        User Authenticate(UserSignInDto modelDto);
 
-        User Register(string username, string password);
+        User Register(UserRegisterDto modelDto);
     }
 }

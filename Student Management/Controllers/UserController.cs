@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Student_Management.Models;
+using Student_Management.Models.Dtos;
 using Student_Management.Repository.IRepository;
 
 namespace Student_Management.Controllers
@@ -24,15 +25,29 @@ namespace Student_Management.Controllers
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User model)
+        [ProducesResponseType(200, Type = typeof(UserSignInDto))]
+        public IActionResult Authenticate(UserSignInDto model)
         {
-            var user = userRepository.Authenticate(model.Username, model.Password);
-            if(user == null)
+            if (ModelState.IsValid)
             {
-                return BadRequest(new { message = "Username or password is incorrect" });
+                var user = userRepository.Authenticate(model);
+                return Ok(user);
             }
 
-            return Ok(user);
-        } 
+            return BadRequest(new { message = "Not Valid"});
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ProducesResponseType(200, Type = typeof(UserRegisterDto))]
+        public IActionResult Register(UserRegisterDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = userRepository.Register(model);
+                return Ok(user);
+            }
+            return BadRequest(new { message = "Not Valid" });
+        }
     }
 }
